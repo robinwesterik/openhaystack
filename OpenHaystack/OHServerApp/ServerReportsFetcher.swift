@@ -59,4 +59,37 @@ struct ServerReportsFetcher {
 
         return promise.futureResult
     }
+    
+    static func decryptReports(findMyResults: FindMyReportResults, idsAndKeys: [DecryptReportsRequestBody.IdWithKey]) -> [DecryptedReportResponse] {
+        
+        var keyMap: [String: FindMyKey] = [:]
+        idsAndKeys.forEach { idAndKey in
+            keyMap[idAndKey.id] = FindMyKey(advertisedKey: Data(), hashedKey: Data(), privateKey: idAndKey.privateKeyData ?? Data(), startTime: nil, duration: nil, pu: nil, yCoordinate: nil, fullKey: nil)
+        }
+        
+        let accessQueue = DispatchQueue(label: "threadSafeAccess", qos: .userInitiated, attributes: .concurrent, autoreleaseFrequency: .workItem, target: nil)
+        var decryptedReports: [DecryptedReportResponse]!
+        accessQueue.sync {
+            decryptedReports = [DecryptedReportResponse](repeating:
+                                                            DecryptedReportResponse(encryptedReport: findMyResults.results[0],
+                                                                                    decryptedReport: FindMyLocationReport(lat: 0, lng: 0, acc: 0, dP: Date(), t: Date(), c: 0))
+                                                            , count: findMyResults.results.count)
+        }
+        DispatchQueue.concurrentPerform(iterations: findMyResults.results.count) { (reportIdx) in
+            let report = findMyResults.results[reportIdx]
+            guard let key = keyMap[report.id] else { return }
+            do {
+                // Decrypt the report
+                let locationReport = try DecryptReports.decrypt(report: report, with: key)
+                accessQueue.async(flags: .barrier) {
+                    let response = DecryptedReportResponse(encryptedReport: report, decryptedReport: locationReport)
+                    decryptedReports[reportIdx] = response
+                }
+            } catch {
+                return
+            }
+        }
+        
+        return decryptedReports
+    }
 }
