@@ -4,25 +4,6 @@ OpenHaystack is a framework for tracking personal Bluetooth devices via Apple's 
 
 <img src="Resources/OpenHaystack-Screenshot.png" alt="Screenshot of the app" width="701" />
 
-## Table of contents
-
-- [What is _OpenHaystack_?](#what-is-openhaystack)
-  - [History](#history)
-  - [Disclaimer](#disclaimer)
-- [How to use _OpenHaystack_?](#how-to-use-openhaystack)
-  - [System requirements](#system-requirements)
-  - [Installation](#installation)
-  - [Usage](#usage)
-- [How does Apple's Find My network work?](#how-does-apples-find-my-network-work)
-  - [Pairing](#pairing-1)
-  - [Losing](#losing-2)
-  - [Finding](#finding-3)
-  - [Searching](#searching-4)
-- [How to track other Bluetooth devices?](#how-to-track-other-bluetooth-devices)
-- [Authors](#authors)
-- [References](#references)
-- [License](#license)
-
 ## What is _OpenHaystack_?
 
 OpenHaystack is an application that allows you to create your own accessories that are tracked by Apple's [Find My network](#how-does-apples-find-my-network-work). All you need is a Mac and a [BBC micro:bit](https://microbit.org/) or any [other Bluetooth-capable device](#how-to-track-other-bluetooth-devices).
