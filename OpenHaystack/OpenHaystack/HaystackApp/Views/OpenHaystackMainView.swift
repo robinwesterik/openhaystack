@@ -157,6 +157,16 @@ struct OpenHaystackMainView: View {
                 content: {
                     self.mailStatePopover
                 })
+
+            #if DEBUG
+                Button(
+                    action: {
+                        self.exportReports()
+                    },
+                    label: {
+                        Text("Export reports")
+                    })
+            #endif
         }
     }
 
@@ -287,6 +297,40 @@ struct OpenHaystackMainView: View {
         }
     }
 
+    func exportReports() {
+        guard let accessory = self.focusedAccessory,
+            let reports = accessory.locations,
+            let reportsData = try? PropertyListEncoder().encode(reports)
+        else { return }
+
+        let sortedReports = reports.sorted(by: { $0.timestamp ?? Date() < $1.timestamp ?? Date() })
+
+        let startDate = sortedReports.first?.timestamp ?? Date()
+        let endDate = sortedReports.last?.timestamp ?? Date()
+        let df = DateFormatter()
+        df.dateFormat = "dd.MM.yy"
+
+        let savePanel = NSSavePanel()
+        savePanel.allowedFileTypes = ["plist"]
+        savePanel.canCreateDirectories = true
+        savePanel.directoryURL = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        savePanel.message = "Export all recent locations for this accessory"
+        savePanel.nameFieldLabel = "Filename"
+        savePanel.nameFieldStringValue = "\(accessory.name)_\(df.string(from: startDate))-\(df.string(from: endDate)).plist"
+        savePanel.prompt = "Export"
+        savePanel.title = "Export accessories & keys"
+
+        let result = savePanel.runModal()
+
+        if result == .OK,
+            let url = savePanel.url
+        {
+            // Store the accessory file
+            try? reportsData.write(to: url)
+        }
+
+    }
+
     // MARK: - Alerts
 
     // swiftlint:disable function_body_length
@@ -403,37 +447,5 @@ struct OpenHaystackMainView_Previews: PreviewProvider {
 extension Alert.Button {
     static func okay() -> Alert.Button {
         Alert.Button.default(Text("Okay"))
-    }
-}
-
-extension TimeInterval {
-    var description: String {
-        var value = 0
-        var unit = Units.second
-        Units.allCases.forEach { u in
-            if self.rounded() >= u.rawValue {
-                value = Int((self / u.rawValue).rounded())
-                unit = u
-            }
-        }
-        return "\(value) \(unit.description)\(value > 1 ? "s" : "")"
-    }
-
-    enum Units: Double, CaseIterable {
-        case second = 1
-        case minute = 60
-        case hour = 3600
-        case day = 86400
-        case week = 604800
-
-        var description: String {
-            switch self {
-            case .second: return "Second"
-            case .minute: return "Minute"
-            case .hour: return "Hour"
-            case .day: return "Day"
-            case .week: return "Week"
-            }
-        }
     }
 }

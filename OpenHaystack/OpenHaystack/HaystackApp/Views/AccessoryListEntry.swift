@@ -69,15 +69,12 @@ struct AccessoryListEntry: View {
             Button("Delete", action: { self.delete(accessory) })
             Divider()
             Button("Rename", action: { self.editingName = true })
-            Divider()
-            Button("Copy advertisment key (Base64)", action: { self.copyPublicKey(of: accessory) })
-            Button("Copy key ID (Base64)", action: { self.copyPublicKeyHash(of: accessory) })
-            Divider()
+
             Button("Mark as \(accessory.isDeployed ? "deployable" : "deployed")", action: { accessory.isDeployed.toggle() })
         }
     }
 
-    func copyPublicKey(of accessory: Accessory) {
+    func copyAdvertisementKeyB64(of accessory: Accessory) {
         do {
             let publicKey = try accessory.getAdvertisementKey()
             let pasteboard = NSPasteboard.general
@@ -95,6 +92,28 @@ struct AccessoryListEntry: View {
             let pasteboard = NSPasteboard.general
             pasteboard.prepareForNewContents(with: .currentHostOnly)
             pasteboard.setString(keyID, forType: .string)
+        } catch {
+            os_log("Failed extracing public key %@", String(describing: error))
+            assert(false)
+        }
+    }
+
+    func copyAdvertisementKey(escapedString: Bool) {
+        do {
+            let publicKey = try self.accessory.getActualPublicKey()
+            let keyByteArray = [UInt8](publicKey)
+
+            if escapedString {
+                let string = keyByteArray.map { "\\x\(String($0, radix: 16))" }.joined()
+                let pasteboard = NSPasteboard.general
+                pasteboard.prepareForNewContents(with: .currentHostOnly)
+                pasteboard.setString(string, forType: .string)
+            } else {
+                let string = keyByteArray.map { "0x\(String($0, radix: 16))" }.joined(separator: ", ")
+                let pasteboard = NSPasteboard.general
+                pasteboard.prepareForNewContents(with: .currentHostOnly)
+                pasteboard.setString(string, forType: .string)
+            }
         } catch {
             os_log("Failed extracing public key %@", String(describing: error))
             assert(false)

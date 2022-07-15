@@ -10,7 +10,7 @@
 import CoreLocation
 import Foundation
 
-struct FindMyDevice: Codable, Hashable {
+class FindMyDevice: Codable, Hashable {
 
     let deviceId: String
     var keys = [FindMyKey]()
@@ -21,6 +21,16 @@ struct FindMyDevice: Codable, Hashable {
     var reports: [FindMyReport]?
 
     var decryptedReports: [FindMyLocationReport]?
+
+    internal init(
+        deviceId: String, keys: [FindMyKey] = [FindMyKey](), catalinaBigSurKeyFiles: [Data]? = nil, reports: [FindMyReport]? = nil, decryptedReports: [FindMyLocationReport]? = nil
+    ) {
+        self.deviceId = deviceId
+        self.keys = keys
+        self.catalinaBigSurKeyFiles = catalinaBigSurKeyFiles
+        self.reports = reports
+        self.decryptedReports = decryptedReports
+    }
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(deviceId)
@@ -157,18 +167,20 @@ struct FindMyLocationReport: Codable {
     let datePublished: Date
     let timestamp: Date?
     let confidence: UInt8?
+    let status: UInt8
 
     var location: CLLocation {
         return CLLocation(latitude: latitude, longitude: longitude)
     }
 
-    init(lat: Double, lng: Double, acc: UInt8, dP: Date, t: Date, c: UInt8) {
+    init(lat: Double, lng: Double, acc: UInt8, dP: Date, t: Date, c: UInt8, s: UInt8 = 0) {
         self.latitude = lat
         self.longitude = lng
         self.accuracy = acc
         self.datePublished = dP
         self.timestamp = t
         self.confidence = c
+        self.status = s
     }
 
     init(from decoder: Decoder) throws {
@@ -176,6 +188,7 @@ struct FindMyLocationReport: Codable {
 
         self.latitude = try values.decode(Double.self, forKey: .latitude)
         self.longitude = try values.decode(Double.self, forKey: .longitude)
+        self.status = (try? values.decode(UInt8.self, forKey: .status)) ?? 0
 
         do {
             let uAcc = try values.decode(UInt8.self, forKey: .accuracy)
@@ -188,8 +201,8 @@ struct FindMyLocationReport: Codable {
         self.datePublished = try values.decode(Date.self, forKey: .datePublished)
         self.timestamp = try? values.decode(Date.self, forKey: .timestamp)
         self.confidence = try? values.decode(UInt8.self, forKey: .confidence)
-    }
 
+    }
 }
 
 enum FindMyError: Error {
