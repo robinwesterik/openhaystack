@@ -116,6 +116,52 @@ Feel free to port OpenHaystack to other devices that support Bluetooth Low Energ
 
 ![Setup](Resources/Setup.jpg)
 
+## OpenHaystack Server
+Location data can be retrieved via a Web API while running OHServerApp at 127.0.0.1:8080 
+To get and decrypt the location data from multiple devices, make a POST request at 127.0.0.1:8080/getAndDecryptReports
+;;;
+{
+	"ids":
+	[
+		{
+			"id":"",
+			"privateKey":""
+		},
+		{
+			"id":"",
+			"privateKey":""
+		}
+	]
+}
+;;;
+
+The id and private key are in base64 format and can be retrieved with the OpenHaystack GUI.
+Standard response is an array of encrypted/decrypted reports, like 
+this:
+;;;
+[
+	{
+		"decryptedReport": {
+			"status": 0,
+			"confidence": 3,
+			"longitude": 108.7078,
+			"latitude": 10.7323,
+			"accuracy": 111,
+			"timestamp": "",
+			"datePublished": ""
+		},
+		"encryptedReport": {
+			"payload": "",
+			"id": "",
+			"statusCode": 0,
+			"datePublished": 
+		}
+	},
+]
+;;;
+
+
+
 ## Authors
 
 - **Alexander Heinrich** ([@Sn0wfreezeDev](https://github.com/Sn0wfreezeDev), [email](mailto:aheinrich@seemoo.tu-darmstadt.de))
