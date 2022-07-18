@@ -30,7 +30,6 @@
 		7821DAD125F7B2C10054DC33 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821DAD025F7B2C10054DC33 /* FileManager.swift */; };
 		7821DAD325F7C39A0054DC33 /* ESP32InstallSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821DAD225F7C39A0054DC33 /* ESP32InstallSheet.swift */; };
 		7822D3642739337F0031B006 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7822D3632739337F0031B006 /* AppDelegate.swift */; };
-		7822D3662739337F0031B006 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7822D3652739337F0031B006 /* ViewController.swift */; };
 		7822D368273933800031B006 /* ServerAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7822D367273933800031B006 /* ServerAssets.xcassets */; };
 		7822D370273933940031B006 /* ServerReportsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782578842628388F00B8B953 /* ServerReportsFetcher.swift */; };
 		7822D371273933940031B006 /* HTTPBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782578822628380200B8B953 /* HTTPBody.swift */; };
@@ -107,6 +106,10 @@
 		78EC227225DBC8CE0042B775 /* Accessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EC227125DBC8CE0042B775 /* Accessory.swift */; };
 		78EC227725DBDB7E0042B775 /* KeychainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EC227625DBDB7E0042B775 /* KeychainController.swift */; };
 		78F8BB4C261C50EB00D9F37F /* LargeButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F8BB4B261C50EB00D9F37F /* LargeButtonStyle.swift */; };
+		CEB2EEA728855F6A004E7A2F /* Accessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2EEA628855F6A004E7A2F /* Accessory.swift */; };
+		CEB2EEAB28855F7E004E7A2F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2EEA828855F7E004E7A2F /* ViewController.swift */; };
+		CEB2EEAC28855F7E004E7A2F /* AccessoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2EEA928855F7E004E7A2F /* AccessoryController.swift */; };
+		CEB2EEAD28855F7E004E7A2F /* KeychainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2EEAA28855F7E004E7A2F /* KeychainController.swift */; };
 		F126102F2600D1D80066A859 /* Slider+LogScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126102E2600D1D80066A859 /* Slider+LogScale.swift */; };
 		F12D5A5A25FA4F3500CBBA09 /* BluetoothAccessoryScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12D5A5925FA4F3500CBBA09 /* BluetoothAccessoryScanner.swift */; };
 		F12D5A6025FA79FA00CBBA09 /* Advertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12D5A5F25FA79FA00CBBA09 /* Advertisement.swift */; };
@@ -193,7 +196,6 @@
 		7821DAD225F7C39A0054DC33 /* ESP32InstallSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESP32InstallSheet.swift; sourceTree = "<group>"; };
 		7822D3612739337F0031B006 /* OHServerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OHServerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7822D3632739337F0031B006 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7822D3652739337F0031B006 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7822D367273933800031B006 /* ServerAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ServerAssets.xcassets; sourceTree = "<group>"; };
 		7822D36C273933800031B006 /* OHServerApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OHServerApp.entitlements; sourceTree = "<group>"; };
 		7822D37327393B630031B006 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -248,6 +250,10 @@
 		78EC227125DBC8CE0042B775 /* Accessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessory.swift; sourceTree = "<group>"; };
 		78EC227625DBDB7E0042B775 /* KeychainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainController.swift; sourceTree = "<group>"; };
 		78F8BB4B261C50EB00D9F37F /* LargeButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeButtonStyle.swift; sourceTree = "<group>"; };
+		CEB2EEA628855F6A004E7A2F /* Accessory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Accessory.swift; path = Model/Accessory.swift; sourceTree = "<group>"; };
+		CEB2EEA828855F7E004E7A2F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controller/ViewController.swift; sourceTree = "<group>"; };
+		CEB2EEA928855F7E004E7A2F /* AccessoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccessoryController.swift; path = Controller/AccessoryController.swift; sourceTree = "<group>"; };
+		CEB2EEAA28855F7E004E7A2F /* KeychainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainController.swift; path = Controller/KeychainController.swift; sourceTree = "<group>"; };
 		F126102E2600D1D80066A859 /* Slider+LogScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Slider+LogScale.swift"; sourceTree = "<group>"; };
 		F12D5A5925FA4F3500CBBA09 /* BluetoothAccessoryScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothAccessoryScanner.swift; sourceTree = "<group>"; };
 		F12D5A5F25FA79FA00CBBA09 /* Advertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertisement.swift; sourceTree = "<group>"; };
@@ -431,12 +437,15 @@
 		7822D3622739337F0031B006 /* OHServerApp */ = {
 			isa = PBXGroup;
 			children = (
+				CEB2EEA928855F7E004E7A2F /* AccessoryController.swift */,
+				CEB2EEAA28855F7E004E7A2F /* KeychainController.swift */,
+				CEB2EEA828855F7E004E7A2F /* ViewController.swift */,
+				CEB2EEA628855F6A004E7A2F /* Accessory.swift */,
 				78BAB61527393DF9009D82B6 /* OHServerApp.swift */,
 				7822D37327393B630031B006 /* Info.plist */,
 				7822D3632739337F0031B006 /* AppDelegate.swift */,
 				782578822628380200B8B953 /* HTTPBody.swift */,
 				782578842628388F00B8B953 /* ServerReportsFetcher.swift */,
-				7822D3652739337F0031B006 /* ViewController.swift */,
 				7822D367273933800031B006 /* ServerAssets.xcassets */,
 				7822D36C273933800031B006 /* OHServerApp.entitlements */,
 			);
@@ -953,7 +962,7 @@
 			files = (
 				78CDFF4D2757CFF9008553FA /* DecryptReports.swift in Sources */,
 				7822D371273933940031B006 /* HTTPBody.swift in Sources */,
-				7822D3662739337F0031B006 /* ViewController.swift in Sources */,
+				CEB2EEAC28855F7E004E7A2F /* AccessoryController.swift in Sources */,
 				78CDFF4E2757CFFC008553FA /* FindMyKeyDecoder.swift in Sources */,
 				7822D37627393BBE0031B006 /* AnisetteDataManager.swift in Sources */,
 				78BAB61227393BEA009D82B6 /* ReportsFetcher.m in Sources */,
@@ -962,7 +971,10 @@
 				78BAB61427393CB7009D82B6 /* AppleAccountData.m in Sources */,
 				78BAB61627393DF9009D82B6 /* OHServerApp.swift in Sources */,
 				78BAB61327393CB3009D82B6 /* ALTAnisetteData.m in Sources */,
+				CEB2EEA728855F6A004E7A2F /* Accessory.swift in Sources */,
 				78CDFF562757D5C2008553FA /* BoringSSL.m in Sources */,
+				CEB2EEAD28855F7E004E7A2F /* KeychainController.swift in Sources */,
+				CEB2EEAB28855F7E004E7A2F /* ViewController.swift in Sources */,
 				78CDFF4C2757CFEF008553FA /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

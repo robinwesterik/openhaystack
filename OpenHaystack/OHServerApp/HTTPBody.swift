@@ -14,6 +14,12 @@ struct GetReportsBody: Codable {
     let ids: [String]
 }
 
+struct GenerateAccessory: Codable, Content {
+    let privateKey: String
+    let idKey: String
+    let advertKey: String
+}
+
 struct DecryptReportsRequestBody: Codable, Content {
     let ids: [IdWithKey]
     
@@ -28,7 +34,6 @@ struct DecryptReportsRequestBody: Codable, Content {
         }
     }
 }
-
 
 struct DecryptedReportResponse: Codable, Content {
     let encryptedReport: FindMyReport

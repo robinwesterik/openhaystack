@@ -14,6 +14,10 @@ import Vapor
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
+
+    var accessoryController: AccessoryController?
+    
+    
     
     let vaporThread = DispatchQueue(label: "Vapor", qos: DispatchQoS.default)
 
@@ -33,12 +37,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             let app = try Application(.detect())
             defer { app.shutdown() }
+            
+            let acontr = AccessoryController()
 
             //Routes
             app.post("getLocationReports") { req -> EventLoopFuture<Response> in
                 let reportIds = try req.content.decode(GetReportsBody.self)
                 print("Received report ids")
                 return ServerReportsFetcher.fetchReports(for: reportIds.ids, with: req)
+            }
+            
+            app.post("generateAccessory") { req -> GenerateAccessory in
+                do {
+                    let ac = try acontr.addAccessory()
+                    let idKey = try ac.getKeyId()
+                    let advertKey = try ac.getAdvertisementKey().base64EncodedString()
+                    let privateKey = ac.privateKey.base64EncodedString()
+                    let resp = GenerateAccessory.init(privateKey: privateKey, idKey: idKey, advertKey: advertKey)
+
+                    return resp
+                } catch {
+                    print("Accessory can't be generated")
+                }
+                return GenerateAccessory.init(privateKey: "", idKey: "", advertKey: "")
             }
             
             app.post("getAndDecryptReports") { req -> EventLoopFuture<Response> in

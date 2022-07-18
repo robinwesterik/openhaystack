@@ -4,6 +4,25 @@ OpenHaystack is a framework for tracking personal Bluetooth devices via Apple's 
 
 <img src="Resources/OpenHaystack-Screenshot.png" alt="Screenshot of the app" width="701" />
 
+## Table of contents
+
+- [What is _OpenHaystack_?](#what-is-openhaystack)
+  - [History](#history)
+  - [Disclaimer](#disclaimer)
+- [How to use _OpenHaystack_?](#how-to-use-openhaystack)
+  - [System requirements](#system-requirements)
+  - [Installation](#installation)
+  - [Usage](#usage)
+- [How does Apple's Find My network work?](#how-does-apples-find-my-network-work)
+  - [Pairing](#pairing-1)
+  - [Losing](#losing-2)
+  - [Finding](#finding-3)
+  - [Searching](#searching-4)
+- [How to track other Bluetooth devices?](#how-to-track-other-bluetooth-devices)
+- [Authors](#authors)
+- [References](#references)
+- [License](#license)
+
 ## What is _OpenHaystack_?
 
 OpenHaystack is an application that allows you to create your own accessories that are tracked by Apple's [Find My network](#how-does-apples-find-my-network-work). All you need is a Mac and a [BBC micro:bit](https://microbit.org/) or any [other Bluetooth-capable device](#how-to-track-other-bluetooth-devices).
@@ -34,7 +53,8 @@ The OpenHaystack application requires a custom plugin for Apple Mail. It is used
 Therefore, the installation procedure is slightly different and requires you to temporarily disable [Gatekeeper](https://support.apple.com/guide/security/gatekeeper-and-runtime-protection-sec5599b66df/1/web/1).
 Our plugin does not access any other private data such as emails (see [source code](OpenHaystack/OpenHaystackMail)).
 
-1. Build the application from source via Xcode.
+1. Download a precompiled binary release from our <a href="https://github.com/seemoo-lab/openhaystack/releases">GitHub page</a>.  
+   _Alternative:_ build the application from source via Xcode.
 2. Open OpenHaystack. This will ask you to install the Mail plugin in `~/Library/Mail/Bundle`.
 3. Open a terminal and run `sudo spctl --master-disable`, which will disable Gatekeeper and allow our Apple Mail plugin to run.
 4. Open Apple Mail. Go to _Preferences_ → _General_ → _Manage Plug-Ins..._ and activate the checkbox next to _OpenHaystackMail.mailbundle_.
@@ -96,49 +116,6 @@ Feel free to port OpenHaystack to other devices that support Bluetooth Low Energ
 
 ![Setup](Resources/Setup.jpg)
 
-## OpenHaystack Server
-Location data can be retrieved via a Web API while running OHServerApp at 127.0.0.1:8080 
-To get and decrypt the location data from multiple devices, make a POST request at 127.0.0.1:8080/getAndDecryptReports
-;;;
-{
-	"ids":
-	[
-		{
-			"id":"",
-			"privateKey":""
-		},
-		{
-			"id":"",
-			"privateKey":""
-		}
-	]
-}
-;;;
-
-The id and private key are in base64 format and can be retrieved with the OpenHaystack GUI.
-Standard response is an array of encrypted/decrypted reports, like 
-this:
-;;;
-[
-	{
-		"decryptedReport": {
-			"status": 0,
-			"confidence": 3,
-			"longitude": 108.7078,
-			"latitude": 10.7323,
-			"accuracy": 111,
-			"timestamp": "",
-			"datePublished": ""
-		},
-		"encryptedReport": {
-			"payload": "",
-			"id": "",
-			"statusCode": 0,
-			"datePublished": 
-		}
-	},
-]
-;;;
 ## Authors
 
 - **Alexander Heinrich** ([@Sn0wfreezeDev](https://github.com/Sn0wfreezeDev), [email](mailto:aheinrich@seemoo.tu-darmstadt.de))
